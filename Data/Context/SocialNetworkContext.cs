@@ -11,6 +11,7 @@ namespace Data.Context
     public class SocialNetworkContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<PhotoProfile> PhotoProfiles { get; set; }
 
         public SocialNetworkContext()
             : base(Data.Properties.Settings.Default.DbConnectionString)
@@ -19,6 +20,9 @@ namespace Data.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<User>()
+                .HasRequired(u => u.PhotoProfile);
 
             //Para Objeto de Valor
             //modelBuilder.Entity<User>()

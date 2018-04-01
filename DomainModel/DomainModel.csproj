@@ -41,17 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Conversation.cs" />
     <Compile Include="Entities\EntityBase.cs" />
-    <Compile Include="Entities\Match.cs" />
+    <Compile Include="Entities\Message.cs" />
+    <Compile Include="Interfaces\Repositories\IConversationRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IMessageRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
-    <Compile Include="Interfaces\Services\IMatchServices.cs" />
+    <Compile Include="Interfaces\Services\IConversationService.cs" />
     <Compile Include="ObjectValues\Hair\HairColor.cs" />
     <Compile Include="ObjectValues\Hair\HairLength.cs" />
     <Compile Include="ObjectValues\Hair\HairStyle.cs" />
     <Compile Include="Entities\PhotoProfile.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Interfaces\Services\IUserServices.cs" />
+    <Compile Include="Interfaces\Services\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

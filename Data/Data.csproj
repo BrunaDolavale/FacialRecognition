@@ -48,21 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\SocialNetworkContext.cs" />
-    <Compile Include="Migrations\201803241851534_init.cs" />
-    <Compile Include="Migrations\201803241851534_init.Designer.cs">
-      <DependentUpon>201803241851534_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803241905044_objetosvalor.cs" />
-    <Compile Include="Migrations\201803241905044_objetosvalor.Designer.cs">
-      <DependentUpon>201803241905044_objetosvalor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803241910017_photo.cs" />
-    <Compile Include="Migrations\201803241910017_photo.Designer.cs">
-      <DependentUpon>201803241910017_photo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803312228039_Hair.cs" />
-    <Compile Include="Migrations\201803312228039_Hair.Designer.cs">
-      <DependentUpon>201803312228039_Hair.cs</DependentUpon>
+    <Compile Include="Migrations\201804010501296_init.cs" />
+    <Compile Include="Migrations\201804010501296_init.Designer.cs">
+      <DependentUpon>201804010501296_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +59,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\ConversationRepository.cs" />
+    <Compile Include="Repositories\MessageRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
@@ -89,21 +79,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803241851534_init.resx">
-      <DependentUpon>201803241851534_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803241905044_objetosvalor.resx">
-      <DependentUpon>201803241905044_objetosvalor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803241910017_photo.resx">
-      <DependentUpon>201803241910017_photo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803312228039_Hair.resx">
-      <DependentUpon>201803312228039_Hair.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <EmbeddedResource Include="Migrations\201804010501296_init.resx">
+      <DependentUpon>201804010501296_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

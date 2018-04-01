@@ -17,13 +17,13 @@ namespace Application
     public class ApplicationServices
     {
         //Serviço de Domínio
-        private IUserServices _userServices;
+        private IUserService _userServices;
 
         //Única instância de "ApplicationServices"
         private static ApplicationServices _instance;
         private static SocialNetworkContext context;
 
-        private ApplicationServices(IUserServices userServices)
+        private ApplicationServices(IUserService userServices)
         {
             _userServices = userServices;
         }
@@ -37,8 +37,10 @@ namespace Application
                 //Pseudo Injeção de Dependência
                 context = new SocialNetworkContext();
                 IUserRepository userRepository = new UserRepository(context);
-                IUserServices userServices = new UserServices(userRepository);
+                IUserService userServices = new UserServices(userRepository);
+                //IConversationService userServices = new ConversationService(userRepository);
                 _instance = new ApplicationServices(userServices);
+
             }
             return _instance;
         }
@@ -51,20 +53,30 @@ namespace Application
         }
         public void UpdateUser(User user)
         {
-            _userServices.UpdateUser(user);
+            //Get Original User
+            User originalUser = _userServices.GetUser(user);
+            //Copy Altered User properties to OriginalUser
+            Common.CopyPropertiesTo<User>(user, originalUser);
+            _userServices.UpdateUser(originalUser);
             context.SaveChanges();
         }
-        public void UploadPhoto(User user, System.IO.Stream photo, string contentType)
+        public User GetUser(User user)
         {
-            string photoUrl = BlobService.GetInstance().UploadFile("bruna", Guid.NewGuid().ToString(), photo, contentType);
-            user.PhotoProfile.Url = photoUrl;
-            UpdateUser(user);
+            return _userServices.GetUser(user);
         }
         public IEnumerable<User> GetAllUsers()
         {
             return _userServices.GetAllUsers();
         }
         //############################################
+
+        //######### Utils #########
+        public string UploadPhoto(System.IO.Stream photo, string contentType)
+        {
+            string photoUrl = BlobService.GetInstance().UploadFile("bruna", Guid.NewGuid().ToString(), photo, contentType);
+            return photoUrl;
+        }
+        //#########################
 
     }
 }

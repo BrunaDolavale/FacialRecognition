@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using DomainModel.Entities;
 using Data.Repositories;
 using DomainModel.Interfaces.Repositories;
+using System;
 
 namespace DomainServices.Services
 {
 
-    public class UserServices : IUserServices
+    public class UserServices : IUserService
     {
 
         private IUserRepository _userRepository;
@@ -25,6 +26,11 @@ namespace DomainServices.Services
         public IEnumerable<User> GetAllUsers()
         {
             return _userRepository.GetAll();
+        }
+
+        public User GetUser(User user)
+        {
+            return _userRepository.Get(user);
         }
 
         public void UpdateUser(User user)

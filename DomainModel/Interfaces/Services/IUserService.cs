@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace DomainModel.Interfaces.Services
 {
-    public interface IUserServices
+    public interface IUserService
     {
         void CreateUser(User user);
         void UpdateUser(User user);
+        User GetUser(User user);
         IEnumerable<User> GetAllUsers();
     }
 }

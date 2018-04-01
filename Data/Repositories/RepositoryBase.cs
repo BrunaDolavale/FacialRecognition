@@ -30,6 +30,11 @@ namespace Data.Repositories
             _dbSet.Remove(entity);
         }
 
+        public T Get(T entity)
+        {
+            return _dbSet.Find(entity.Id);
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _dbSet;

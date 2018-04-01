@@ -7,14 +7,22 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhotoProfile.Url, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="profilePhoto" />
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -48,11 +56,12 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Sexuality, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Sexuality, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Sexuality, "", new { @class = "text-danger" })
-            </div>
+            <input type="radio" name="Sexuality" id="radio-sexuality-man" value="Man" />
+            <label for="radio-sexuality-man">Man</label>
+            <input type="radio" name="Sexuality" id="radio-sexuality-woman" value="Woman" />
+            <label for="radio-sexuality-woman">Woman</label>
+            <input type="radio" name="Sexuality" id="radio-sexuality-both" value="Both" />
+            <label for="radio-sexuality-both">Both</label>
         </div>
 
         <div class="form-group">

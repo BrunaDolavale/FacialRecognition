@@ -49,10 +49,14 @@ namespace WebApp.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Birth,Gender,Sexuality,Description,CellphoneNumber,Email,SchoolLevel,Office")] User user)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Birth,Gender,Sexuality,Description,CellphoneNumber,Email,SchoolLevel,Office")] User user, HttpPostedFileBase profilePhoto)
         {
             if (ModelState.IsValid)
             {
+                user.PhotoProfile = new PhotoProfile();
+                user.PhotoProfile.Url = "https://infnetstorage.blob.core.windows.net/bruna/default-user.png";
+                if (profilePhoto != null)
+                    user.PhotoProfile.Url = ApplicationServices.GetInstance().UploadPhoto(profilePhoto.InputStream, profilePhoto.ContentType);
                 ApplicationServices.GetInstance().AddNewUser(user);
                 return RedirectToAction("Index");
             }
@@ -80,12 +84,14 @@ namespace WebApp.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Birth,Gender,Sexuality,Description,CellphoneNumber,Email,SchoolLevel,Office")] User user)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Birth,Gender,Sexuality,Description,CellphoneNumber,Email,SchoolLevel,Office")] User user, HttpPostedFileBase profilePhoto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                 
+                if (profilePhoto != null)
+                    originalUser.PhotoProfile.Url = ApplicationServices.GetInstance().UploadPhoto(profilePhoto.InputStream, profilePhoto.ContentType);
+                ApplicationServices.GetInstance().UpdateUser(originalUser);
                 return RedirectToAction("Index");
             }
             return View(user);
