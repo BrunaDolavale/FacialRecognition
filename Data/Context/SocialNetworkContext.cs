@@ -35,5 +35,6 @@ namespace Data.Context
             base.OnModelCreating(modelBuilder);
         }
 
+        public System.Data.Entity.DbSet<DomainModel.Entities.Message> Messages { get; set; }
     }
 }

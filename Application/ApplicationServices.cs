@@ -18,14 +18,17 @@ namespace Application
     {
         //Serviço de Domínio
         private IUserService _userServices;
+        private IMessageService _messageService;
 
         //Única instância de "ApplicationServices"
         private static ApplicationServices _instance;
         private static SocialNetworkContext context;
 
-        private ApplicationServices(IUserService userServices)
+        private ApplicationServices(IUserService userServices, IMessageService messageService)
         {
             _userServices = userServices;
+            _messageService = messageService;
+
         }
 
         //Para poder acessar esse método sem ele ter sido instanciado
@@ -40,8 +43,9 @@ namespace Application
                 IConversationRepository conversationRepository = new ConversationRepository(context);
                 IMessageRepository messageRepository = new MessageRepository(context);
                 IUserService userServices = new UserServices(userRepository);
+                IMessageService messageService = new MessageService (messageRepository);
                 IConversationService conversationService = new ConversationService(conversationRepository, messageRepository);
-                _instance = new ApplicationServices(userServices);
+                _instance = new ApplicationServices(userServices, messageService);
 
             }
             return _instance;
@@ -81,10 +85,13 @@ namespace Application
         //#########################
 
         //########### Serviços de Conversation e Mensagem #############
-        public string SendMessage()
-        {
 
-            return null;
+        //private static List<Conversation> conversations = new List<Conversation>();
+
+        public void SendMessage(Message message)
+        {
+            _messageService.SendMessage(message);
+            context.SaveChanges();
         }
         //############################################################
 

@@ -49,6 +49,7 @@
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Interfaces\Services\IConversationService.cs" />
+    <Compile Include="Interfaces\Services\IMessageService.cs" />
     <Compile Include="ObjectValues\Hair\HairColor.cs" />
     <Compile Include="ObjectValues\Hair\HairLength.cs" />
     <Compile Include="ObjectValues\Hair\HairStyle.cs" />
