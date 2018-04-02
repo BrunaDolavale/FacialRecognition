@@ -49,7 +49,8 @@ namespace WebApp.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Birth,Gender,Sexuality,Description,CellphoneNumber,Email,SchoolLevel,Office")] User user, HttpPostedFileBase profilePhoto)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Birth,Gender,Sexuality,Description," +
+            "CellphoneNumber,Email,SchoolLevel,Office")] User user, HttpPostedFileBase profilePhoto)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +89,7 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                 
+                User originalUser = ApplicationServices.GetInstance().GetUser(user);
                 if (profilePhoto != null)
                     originalUser.PhotoProfile.Url = ApplicationServices.GetInstance().UploadPhoto(profilePhoto.InputStream, profilePhoto.ContentType);
                 ApplicationServices.GetInstance().UpdateUser(originalUser);

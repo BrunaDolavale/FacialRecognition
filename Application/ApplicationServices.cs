@@ -37,8 +37,10 @@ namespace Application
                 //Pseudo Injeção de Dependência
                 context = new SocialNetworkContext();
                 IUserRepository userRepository = new UserRepository(context);
+                IConversationRepository conversationRepository = new ConversationRepository(context);
+                IMessageRepository messageRepository = new MessageRepository(context);
                 IUserService userServices = new UserServices(userRepository);
-                //IConversationService userServices = new ConversationService(userRepository);
+                IConversationService conversationService = new ConversationService(conversationRepository, messageRepository);
                 _instance = new ApplicationServices(userServices);
 
             }
@@ -77,6 +79,14 @@ namespace Application
             return photoUrl;
         }
         //#########################
+
+        //########### Serviços de Conversation e Mensagem #############
+        public string SendMessage()
+        {
+
+            return null;
+        }
+        //############################################################
 
     }
 }
